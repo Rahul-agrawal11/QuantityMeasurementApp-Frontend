@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QM · Quantity Measurement</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- AUTH PAGE -->
+  <div id="authPage">
+    <div class="auth-bg">
+      <div class="auth-grid-lines"></div>
+      <div class="auth-orb auth-orb-1"></div>
+      <div class="auth-orb auth-orb-2"></div>
+    </div>
+    <div class="auth-wrap">
+      <div class="auth-brand">
+        <div class="auth-logo">
+          <span class="logo-icon">⬡</span>
+          <span class="logo-text">QM</span>
+        </div>
+        <h1 class="auth-title">Quantity<br /><em>Measurement</em></h1>
+        <p class="auth-subtitle">Precision unit operations — compare, convert, calculate</p>
+      </div>
+      <div class="auth-card">
+        <div class="auth-tabs">
+          <button class="auth-tab active" onclick="switchTab('login')" id="tabLogin">Login</button>
+          <button class="auth-tab" onclick="switchTab('signup')" id="tabSignup">Sign Up</button>
+          <div class="auth-tab-ink" id="tabInk"></div>
+        </div>
+        <div class="auth-body">
+          <div id="loginForm" class="auth-form">
+            <div class="a-field">
+              <label>Email Address</label>
+              <div class="inp-wrap">
+                <span class="inp-icon">✉</span>
+                <input type="email" id="lEmail" placeholder="you@email.com" />
+              </div>
+            </div>
+            <div class="a-field">
+              <label>Password</label>
+              <div class="inp-wrap">
+                <span class="inp-icon">⬤</span>
+                <input type="password" id="lPass" placeholder="••••••••" />
+              </div>
+            </div>
+            <button class="btn-auth" id="btnLogin" onclick="doLogin()">
+              <span>Sign In</span>
+              <span class="btn-arrow">→</span>
+            </button>
+            <div class="auth-divider"><span>or</span></div>
+            <button class="btn-google" onclick="doGoogleLogin()">
+              <svg class="google-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+              <span>Continue with Google</span>
+            </button>
+            <div class="a-error" id="lErr"></div>
+          </div>
+          <div id="signupForm" class="auth-form" style="display:none">
+            <div class="a-field">
+              <label>Email Address</label>
+              <div class="inp-wrap">
+                <span class="inp-icon">✉</span>
+                <input type="email" id="sEmail" placeholder="you@email.com" />
+              </div>
+            </div>
+            <div class="a-field">
+              <label>Password</label>
+              <div class="inp-wrap">
+                <span class="inp-icon">⬤</span>
+                <input type="password" id="sPass" placeholder="Min 8 characters" />
+              </div>
+            </div>
+            <button class="btn-auth" id="btnSignup" onclick="doSignup()">
+              <span>Create Account</span>
+              <span class="btn-arrow">→</span>
+            </button>
+            <div class="auth-divider"><span>or</span></div>
+            <button class="btn-google" onclick="doGoogleLogin()">
+              <svg class="google-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+              <span>Continue with Google</span>
+            </button>
+            <div class="a-error" id="sErr"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN PAGE -->
+  <div id="mainPage" class="hidden">
+    <nav class="topnav">
+      <div class="nav-left">
+        <span class="nav-logo-icon">⬡</span>
+        <span class="nav-logo-text">QM <span class="nav-logo-sub">/ Quantity Measurement</span></span>
+      </div>
+      <div class="nav-right">
+        <span class="nav-badge" id="navEmail"></span>
+        <button class="btn-logout" onclick="doLogout()">↩ Logout</button>
+      </div>
+    </nav>
+
+    <div class="main-layout">
+
+      <!-- LEFT PANEL: CONTROLS -->
+      <div class="panel-main">
+
+        <!-- TYPE SELECTOR -->
+        <section class="section">
+          <div class="section-label">
+            <span class="sec-num">01</span>
+            <span>Measurement Type</span>
+          </div>
+          <div class="type-grid">
+            <div class="type-card active" onclick="pickType(this,'LengthUnit')">
+              <div class="type-card-inner">
+                <div class="type-icon-wrap">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="3" y2="18"/><line x1="21" y1="6" x2="21" y2="18"/><line x1="8" y1="9" x2="8" y2="15"/><line x1="13" y1="9" x2="13" y2="15"/></svg>
+                </div>
+                <div class="type-label">Length</div>
+                <div class="type-units">ft · in · yd · cm</div>
+              </div>
+            </div>
+            <div class="type-card" onclick="pickType(this,'WeightUnit')">
+              <div class="type-card-inner">
+                <div class="type-icon-wrap">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="3"/><path d="M6.5 17.5L5 21h14l-1.5-3.5"/><path d="M4.5 17.5h15a1 1 0 0 0 .96-1.28l-1.5-6A1 1 0 0 0 18 9.5H6a1 1 0 0 0-.96.72l-1.5 6A1 1 0 0 0 4.5 17.5Z"/></svg>
+                </div>
+                <div class="type-label">Weight</div>
+                <div class="type-units">kg · g · lb · mg</div>
+              </div>
+            </div>
+            <div class="type-card" onclick="pickType(this,'TemperatureUnit')">
+              <div class="type-card-inner">
+                <div class="type-icon-wrap">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>
+                </div>
+                <div class="type-label">Temperature</div>
+                <div class="type-units">°C · °F</div>
+              </div>
+            </div>
+            <div class="type-card" onclick="pickType(this,'VolumeUnit')">
+              <div class="type-card-inner">
+                <div class="type-icon-wrap">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3H5L3 12h18L19 3h-4"/><path d="M9 3a3 3 0 0 0 6 0"/><path d="M3 12v7a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/></svg>
+                </div>
+                <div class="type-label">Volume</div>
+                <div class="type-units">L · mL · gal</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ACTION SELECTOR -->
+        <section class="section">
+          <div class="section-label">
+            <span class="sec-num">02</span>
+            <span>Operation</span>
+          </div>
+          <div class="op-pills" id="mainTabs">
+            <button class="op-pill active" onclick="pickAction(this,'compare')">
+              <span class="pill-icon">≈</span> Compare
+            </button>
+            <button class="op-pill" onclick="pickAction(this,'convert')">
+              <span class="pill-icon">⇄</span> Convert
+            </button>
+            <button class="op-pill" onclick="pickAction(this,'arithmetic')">
+              <span class="pill-icon">∑</span> Arithmetic
+            </button>
+          </div>
+
+          <!-- ARITHMETIC SUB OPS -->
+          <div class="arith-sub" id="arithSub" style="display:none">
+            <div class="arith-sub-label">Select arithmetic operation</div>
+            <div class="arith-pills" id="arithTabs">
+              <button class="arith-pill active" onclick="pickArith(this,'add')">+ Add</button>
+              <button class="arith-pill" onclick="pickArith(this,'add-with-target-unit')">+ Add → Target</button>
+              <button class="arith-pill" onclick="pickArith(this,'subtract')">− Subtract</button>
+              <button class="arith-pill" onclick="pickArith(this,'subtract-with-target-unit')">− Sub → Target</button>
+              <button class="arith-pill" onclick="pickArith(this,'divide')">÷ Divide</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- INPUTS -->
+        <section class="section">
+          <div class="section-label">
+            <span class="sec-num">03</span>
+            <span>Input Values</span>
+          </div>
+          <div class="inputs-grid">
+            <div class="input-block">
+              <div class="input-block-label" id="lbl1">Value A</div>
+              <div class="input-row">
+                <input class="val-inp" type="number" id="val1" placeholder="0.00" step="any" />
+                <select class="unit-sel" id="unit1"></select>
+              </div>
+            </div>
+            <div class="input-divider">
+              <span id="opSymbol">≈</span>
+            </div>
+            <div class="input-block">
+              <div class="input-block-label" id="lbl2">Value B</div>
+              <div class="input-row">
+                <input class="val-inp" type="number" id="val2" placeholder="0.00" step="any" />
+                <select class="unit-sel" id="unit2"></select>
+              </div>
+            </div>
+          </div>
+
+          <!-- TARGET ROW -->
+          <div class="target-row" id="targetRow" style="display:none">
+            <div class="target-label">
+              <span class="target-badge">TARGET</span>
+              Express result in unit
+            </div>
+            <div class="target-inputs">
+              <select class="unit-sel unit-sel-full" id="targetUnit"></select>
+            </div>
+          </div>
+        </section>
+
+        <!-- RUN -->
+        <button class="btn-run" id="btnRun" onclick="runOp()">
+          <span class="btn-run-text">Run Operation</span>
+          <span class="btn-run-icon">▶</span>
+        </button>
+
+        <!-- RESULT -->
+        <div class="result-box" id="resultBox">
+          <div class="result-header">
+            <span class="result-label">Result</span>
+            <span class="result-op" id="resultOp"></span>
+          </div>
+          <div class="result-val-wrap">
+            <div class="res-val" id="resVal">—</div>
+            <div class="res-unit" id="resUnit"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT PANEL: HISTORY -->
+      <aside class="panel-hist">
+        <div class="hist-head">
+          <div class="hist-title">
+            <span class="hist-icon">◎</span>
+            History
+          </div>
+          <button class="btn-clr" onclick="clearHist()">CLEAR ALL</button>
+        </div>
+        <div class="hist-filter" id="histFilter">
+          <div class="hchip active" onclick="filterHist(this,'all')">All</div>
+          <div class="hchip" onclick="filterHist(this,'compare')">Compare</div>
+          <div class="hchip" onclick="filterHist(this,'convert')">Convert</div>
+          <div class="hchip" onclick="filterHist(this,'add')">Add</div>
+          <div class="hchip" onclick="filterHist(this,'subtract')">Sub</div>
+          <div class="hchip" onclick="filterHist(this,'divide')">Divide</div>
+          <div class="hchip" onclick="filterHist(this,'error')">Errors</div>
+        </div>
+        <div class="hist-list" id="histList">
+          <div class="hist-empty">
+            <div class="hist-empty-icon">◈</div>
+            <div>No operations yet.<br/>Run something!</div>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
