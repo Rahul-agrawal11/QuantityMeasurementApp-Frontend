@@ -1,0 +1,85 @@
+.result-card {
+  background: var(--surface);
+  border: 1.5px solid var(--accent-border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.result-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.result-value-block {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.result-number {
+  font-family: 'DM Mono', monospace;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1;
+}
+
+.result-unit {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.result-type {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-left: auto;
+}
+
+.result-comparison {
+  margin-bottom: 1.25rem;
+}
+
+.comparison-chip {
+  display: inline-block;
+  padding: 0.5rem 1.25rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.comparison-chip.equal { background: var(--success-bg); color: var(--success); }
+.comparison-chip.not-equal { background: var(--danger-bg); color: var(--danger); }
+
+.result-meta { display: flex; flex-direction: column; gap: 0.5rem; }
+
+.meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+}
+
+.meta-label { color: var(--text-muted); }
+.meta-val { color: var(--text); font-weight: 500; }
+
+.op-chip {
+  background: var(--accent-subtle);
+  color: var(--accent);
+  padding: 0.15rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
